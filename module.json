@@ -6,14 +6,16 @@
   "version": "1.0.0",
   "author": "GitHub Copilot and Dsgj",
   "license": "MIT",
-  "minimumCoreVersion": "13",
-  "compatibleCoreVersion": "13.344",
-  "esmodules": ["dist/main.js"],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13.344"
+  },
+  "scripts": ["dist/main.js"],
+  "styles": ["styles/style.css"],
+  "templates": ["templates/effect.html"],
   "manifest": "https://github.com/Dsgj/foundryvtt-module/raw/refs/heads/main/module.json",
   "url": "https://github.com/Dsgj/foundryvtt-module",
   "download": "https://github.com/Dsgj/foundryvtt-module/releases/latest/download/foundryvtt-action-animations.zip",
-  "styles": ["styles/style.css"],
-  "templates": ["templates/effect.html"],
   "dependencies": [
     { "name": "sequencer", "type": "module", "manifest": "https://github.com/fantasycalendar/Sequencer/releases/latest/download/module.json", "optional": true },
     { "name": "jb2a_patreon", "type": "module", "manifest": "https://github.com/Jules-Bens-Alex/jb2a_patreon/releases/latest/download/module.json", "optional": true },
