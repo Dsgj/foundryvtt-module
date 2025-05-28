@@ -111,6 +111,7 @@ window.playActionAnimation = function ({ type, sourceTokenId, targetTokenId, rol
     const target = targetTokenId ? canvas.tokens?.get(targetTokenId) : undefined;
     playAnimation(type, source, target, rollResult);
 };
+globalThis.playActionAnimation = window.playActionAnimation;
 // DM-Only Utility: Force animation for any token and send global notification
 window.dmForceAnimation = function ({ type, sourceTokenId, targetTokenId, rollResult, message }) {
     if (!game.user?.isGM) {
@@ -124,6 +125,7 @@ window.dmForceAnimation = function ({ type, sourceTokenId, targetTokenId, rollRe
         ui.notifications.info(`[DM Broadcast] ${message}`);
     }
 };
+globalThis.dmForceAnimation = window.dmForceAnimation;
 // --- Wild Magic Weather Integration ---
 // If Weather Control module is present, add magical weather effects that impact D&D5e gameplay
 function isWeatherControlActive() {

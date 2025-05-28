@@ -155,6 +155,7 @@ Hooks.on('createChatMessage', async (msg: ChatMessage) => {
     const target = targetTokenId ? canvas.tokens?.get(targetTokenId) : undefined;
     playAnimation(type, source, target, rollResult);
 };
+(globalThis as any).playActionAnimation = (window as any).playActionAnimation;
 
 // DM-Only Utility: Force animation for any token and send global notification
 (window as any).dmForceAnimation = function({
@@ -181,6 +182,7 @@ Hooks.on('createChatMessage', async (msg: ChatMessage) => {
         ui.notifications.info(`[DM Broadcast] ${message}`);
     }
 };
+(globalThis as any).dmForceAnimation = (window as any).dmForceAnimation;
 
 // --- Wild Magic Weather Integration ---
 // If Weather Control module is present, add magical weather effects that impact D&D5e gameplay

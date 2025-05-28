@@ -4,7 +4,7 @@
   "title": "FoundryVTT Action Animations",
   "description": "Enhances Foundry VTT with one-line action animations, DM/Player utilities, and integrations for Sequencer, JB2A, Weather Control, and Dice So Nice. Includes magical overlays, notifications, and evolving NPC moods.",
   "version": "1.0.0",
-  "author": "Your Name",
+  "author": "GitHub Copilot and Dsgj",
   "license": "MIT",
   "minimumCoreVersion": "13",
   "compatibleCoreVersion": "13.344",

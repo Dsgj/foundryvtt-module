@@ -100,3 +100,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Acknowledgments
 Thanks to the Foundry VTT community and the creators of Sequencer, JB2A, Weather Control, and Dice So Nice for their amazing tools.
+
+## Authors
+- GitHub Copilot
+- Dsgj
