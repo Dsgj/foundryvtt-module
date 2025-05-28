@@ -58,37 +58,21 @@ function isJB2AActive(): boolean {
 }
 
 // Play JB2A animation via Sequencer
+// Denna funktion är nu generisk och tar emot en filväg som argument
 async function playSequencerAnimation({
-    type,
+    filePath,
     source,
-    target,
-    rollResult
+    target
 }: {
-    type: string;
+    filePath: string;
     source: any;
     target?: any;
-    rollResult?: number;
 }) {
     if (!isSequencerActive() || !isJB2AActive()) {
-        ui.notifications?.warn("Sequencer and/or JB2A are not enabled! Animation cannot be played.");
+        ui.notifications?.warn("Sequencer och/eller JB2A är inte aktiverade! Animation kan inte spelas.");
         return;
     }
-    let file = "";
-    let filePath = "";
-    // Choose animation based on type and result
-    if (type === "attack") {
-        if (rollResult === 1) {
-            filePath = "modules/jb2a_patreon/Library/1st_Level/Miss/Miss_01_Blue_30ft_Regular.webm";
-        } else if (rollResult === 20) {
-            filePath = "modules/jb2a_patreon/Library/1st_Level/Magic_Missile/MagicMissile_01_Purple_30ft_Regular.webm";
-        } else {
-            filePath = "modules/jb2a_patreon/Library/1st_Level/Sword_Slash/SwordSlash_01_Blue_Regular_15ft.webm";
-        }
-    } else if (type === "cantrip") {
-        filePath = "modules/jb2a_patreon/Library/Cantrips/Fire_Bolt/FireBolt_01_Orange_30ft_Regular.webm";
-    }
     if (!filePath) return;
-    // Play the animation
     new (window as any).Sequence()
         .effect()
         .file(filePath)
@@ -98,25 +82,28 @@ async function playSequencerAnimation({
 }
 
 // Animation utility (placeholder)
-function playAnimation(type: string, source: any, target?: any, rollResult?: number) {
-    // Check if the module setting is enabled
+function playAnimation(type: string, source: any, target?: any, rollResult?: number, filePathOverride?: string) {
     if (!game.settings.get('foundryvtt-module', 'enableAnimations')) {
         return;
     }
     if (isSequencerActive() && isJB2AActive()) {
-        playSequencerAnimation({ type, source, target, rollResult });
-        return;
+        // Om ett filnamn skickas in, använd det, annars ingen animation
+        if (filePathOverride) {
+            playSequencerAnimation({ filePath: filePathOverride, source, target });
+            return;
+        }
+        // Annars: visa bara notifikation
     }
     // Fallback: show only notification
     if (type === 'cantrip' && target instanceof DoorControl) {
         ui.notifications.info(`${source.name} conjures a cantrip, sending magical energy surging towards the door, seeking to unlock or disrupt its mechanism!`);
     } else if (type === 'attack' && target instanceof Token) {
         if (rollResult === 1) {
-            ui.notifications.warn(`${source.name} attempts a daring attack on ${target.name}, but fumbles disastrously, leaving themselves wide open!`);
+            ui.notifications.warn(`${source.name} attempts a daring attack on ${target.name}, men fumlar katastrofalt!`);
         } else if (rollResult === 20) {
-            ui.notifications.info(`${source.name} strikes with flawless precision, landing a critical blow on ${target.name} that echoes with heroic might!`);
+            ui.notifications.info(`${source.name} slår med perfekt precision, en kritisk träff på ${target.name}!`);
         } else {
-            ui.notifications.info(`${source.name} launches a determined assault against ${target.name}, their weapon arcing through the air in a display of skill and resolve.`);
+            ui.notifications.info(`${source.name} attackerar ${target.name}.`);
         }
     }
 }
@@ -150,16 +137,18 @@ Hooks.on('createChatMessage', async (msg: ChatMessage) => {
     type,
     sourceTokenId,
     targetTokenId,
-    rollResult
+    rollResult,
+    filePath
 }: {
     type: 'attack' | 'cantrip';
     sourceTokenId: string;
     targetTokenId?: string;
     rollResult?: number;
+    filePath?: string;
 }) {
     const source = canvas.tokens?.get(sourceTokenId);
     const target = targetTokenId ? canvas.tokens?.get(targetTokenId) : undefined;
-    playAnimation(type, source, target, rollResult);
+    playAnimation(type, source, target, rollResult, filePath);
 };
 (globalThis as any).playActionAnimation = (window as any).playActionAnimation;
 

@@ -29,31 +29,14 @@ function isJB2AActive() {
     return game.modules.get("jb2a_patreon")?.active;
 }
 // Play JB2A animation via Sequencer
-async function playSequencerAnimation({ type, source, target, rollResult }) {
+// Denna funktion är nu generisk och tar emot en filväg som argument
+async function playSequencerAnimation({ filePath, source, target }) {
     if (!isSequencerActive() || !isJB2AActive()) {
-        ui.notifications?.warn("Sequencer and/or JB2A are not enabled! Animation cannot be played.");
+        ui.notifications?.warn("Sequencer och/eller JB2A är inte aktiverade! Animation kan inte spelas.");
         return;
-    }
-    let file = "";
-    let filePath = "";
-    // Choose animation based on type and result
-    if (type === "attack") {
-        if (rollResult === 1) {
-            filePath = "modules/jb2a_patreon/Library/1st_Level/Miss/Miss_01_Blue_30ft_Regular.webm";
-        }
-        else if (rollResult === 20) {
-            filePath = "modules/jb2a_patreon/Library/1st_Level/Magic_Missile/MagicMissile_01_Purple_30ft_Regular.webm";
-        }
-        else {
-            filePath = "modules/jb2a_patreon/Library/1st_Level/Sword_Slash/SwordSlash_01_Blue_Regular_15ft.webm";
-        }
-    }
-    else if (type === "cantrip") {
-        filePath = "modules/jb2a_patreon/Library/Cantrips/Fire_Bolt/FireBolt_01_Orange_30ft_Regular.webm";
     }
     if (!filePath)
         return;
-    // Play the animation
     new window.Sequence()
         .effect()
         .file(filePath)
@@ -62,14 +45,17 @@ async function playSequencerAnimation({ type, source, target, rollResult }) {
         .play();
 }
 // Animation utility (placeholder)
-function playAnimation(type, source, target, rollResult) {
-    // Check if the module setting is enabled
+function playAnimation(type, source, target, rollResult, filePathOverride) {
     if (!game.settings.get('foundryvtt-module', 'enableAnimations')) {
         return;
     }
     if (isSequencerActive() && isJB2AActive()) {
-        playSequencerAnimation({ type, source, target, rollResult });
-        return;
+        // Om ett filnamn skickas in, använd det, annars ingen animation
+        if (filePathOverride) {
+            playSequencerAnimation({ filePath: filePathOverride, source, target });
+            return;
+        }
+        // Annars: visa bara notifikation
     }
     // Fallback: show only notification
     if (type === 'cantrip' && target instanceof DoorControl) {
@@ -77,13 +63,13 @@ function playAnimation(type, source, target, rollResult) {
     }
     else if (type === 'attack' && target instanceof Token) {
         if (rollResult === 1) {
-            ui.notifications.warn(`${source.name} attempts a daring attack on ${target.name}, but fumbles disastrously, leaving themselves wide open!`);
+            ui.notifications.warn(`${source.name} attempts a daring attack on ${target.name}, men fumlar katastrofalt!`);
         }
         else if (rollResult === 20) {
-            ui.notifications.info(`${source.name} strikes with flawless precision, landing a critical blow on ${target.name} that echoes with heroic might!`);
+            ui.notifications.info(`${source.name} slår med perfekt precision, en kritisk träff på ${target.name}!`);
         }
         else {
-            ui.notifications.info(`${source.name} launches a determined assault against ${target.name}, their weapon arcing through the air in a display of skill and resolve.`);
+            ui.notifications.info(`${source.name} attackerar ${target.name}.`);
         }
     }
 }
@@ -112,10 +98,10 @@ Hooks.on('createChatMessage', async (msg) => {
     }
 });
 // Utility: Play an action animation (for players and DM)
-window.playActionAnimation = function ({ type, sourceTokenId, targetTokenId, rollResult }) {
+window.playActionAnimation = function ({ type, sourceTokenId, targetTokenId, rollResult, filePath }) {
     const source = canvas.tokens?.get(sourceTokenId);
     const target = targetTokenId ? canvas.tokens?.get(targetTokenId) : undefined;
-    playAnimation(type, source, target, rollResult);
+    playAnimation(type, source, target, rollResult, filePath);
 };
 globalThis.playActionAnimation = window.playActionAnimation;
 // DM-Only Utility: Force animation for any token and send global notification
