@@ -49,7 +49,8 @@ async function playSequencerAnimation({ type, source, target, rollResult }) {
     if (!file)
         return;
     // Play the animation
-    window.Sequencer.Effect()
+    new window.Sequence()
+        .effect()
         .file(`modules/jb2a_patreon/Library/3rd_Level/${file}.webm`)
         .atLocation(source)
         .stretchTo(target)
@@ -212,7 +213,8 @@ Hooks.on('dnd5e.useItem', async (item, config, options) => {
             color = 'purple';
         else if (mood === 'confident')
             color = 'gold';
-        window.Sequencer.Effect()
+        new window.Sequence()
+            .effect()
             .file(`modules/jb2a_patreon/Library/1st_Level/magic_missile/magic_missile_${color}_30ft.webm`)
             .atLocation(item.actor?.token)
             .play();
