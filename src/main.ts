@@ -84,7 +84,7 @@ async function playSequencerAnimation({
     }
     if (!file) return;
     // Play the animation
-    new (window as any).Sequencer.Effect()
+    (window as any).Sequencer.Effect()
         .file(`modules/jb2a_patreon/Library/3rd_Level/${file}.webm`)
         .atLocation(source)
         .stretchTo(target)
@@ -264,7 +264,7 @@ Hooks.on('dnd5e.useItem', async (item: AnyObject, config: AnyObject, options: An
         if (mood === 'angry') color = 'red';
         else if (mood === 'desperate') color = 'purple';
         else if (mood === 'confident') color = 'gold';
-        new (window as any).Sequencer.Effect()
+        (window as any).Sequencer.Effect()
             .file(`modules/jb2a_patreon/Library/1st_Level/magic_missile/magic_missile_${color}_30ft.webm`)
             .atLocation(item.actor?.token)
             .play();
