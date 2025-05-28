@@ -1,0 +1,32 @@
+{
+  "name": "foundryvtt-module",
+  "version": "1.0.0",
+  "description": "A module for Foundry VTT that adds custom functionality.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "node dist/main.js"
+  },
+  "keywords": [
+    "foundryvtt",
+    "module",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "foundry-vtt-types": "^0.8.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/foundryvtt-module.git"
+  },
+  "homepage": "https://github.com/yourusername/foundryvtt-module#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/foundryvtt-module/issues"
+  }
+}

@@ -1,0 +1,19 @@
+<!--
+  FoundryVTT Action Animations - Advanced Magical Overlay Template
+  Dramatic animated card, floating particles, close button, and dynamic content.
+-->
+<div class="fvaa-overlay">
+  <div class="fvaa-effect-card">
+    <button class="fvaa-close-btn" title="Close" onclick="this.closest('.fvaa-overlay').remove()">&times;</button>
+    <div class="fvaa-effect-title">{{title}}</div>
+    <div class="fvaa-effect-desc">{{description}}</div>
+    <div class="fvaa-particles">
+      {{#each (range 0 18)}}
+        <div class="fvaa-particle"></div>
+      {{/each}}
+    </div>
+    {{#if extra}}
+      <div class="fvaa-effect-extra">{{{extra}}}</div>
+    {{/if}}
+  </div>
+</div>

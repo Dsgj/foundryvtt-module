@@ -1,0 +1,23 @@
+{
+  "id": "foundryvtt-action-animations",
+  "name": "foundryvtt-action-animations",
+  "title": "FoundryVTT Action Animations",
+  "description": "Enhances Foundry VTT with one-line action animations, DM/Player utilities, and integrations for Sequencer, JB2A, Weather Control, and Dice So Nice. Includes magical overlays, notifications, and evolving NPC moods.",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "license": "MIT",
+  "minimumCoreVersion": "13",
+  "compatibleCoreVersion": "13.344",
+  "esmodules": ["dist/main.js"],
+  "manifest": "module.json",
+  "url": "https://github.com/yourusername/foundryvtt-module",
+  "download": "https://github.com/yourusername/foundryvtt-module/releases/latest/download/foundryvtt-module.zip",
+  "styles": ["styles/style.css"],
+  "templates": ["templates/effect.html"],
+  "dependencies": [
+    { "name": "sequencer", "type": "module", "manifest": "https://github.com/fantasycalendar/Sequencer/releases/latest/download/module.json", "optional": true },
+    { "name": "jb2a_patreon", "type": "module", "manifest": "https://github.com/Jules-Bens-Alex/jb2a_patreon/releases/latest/download/module.json", "optional": true },
+    { "name": "weather-control", "type": "module", "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-module-weather-control/releases/latest/download/module.json", "optional": true },
+    { "name": "dice-so-nice", "type": "module", "manifest": "https://github.com/SephirothArt/Dice-So-Nice/releases/latest/download/module.json", "optional": true }
+  ]
+}

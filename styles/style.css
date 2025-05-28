@@ -1,0 +1,102 @@
+/*
+  FoundryVTT Action Animations - Advanced Style Sheet
+  Dramatic magical overlays, animated particles, glowing borders, and responsive effects.
+*/
+
+.fvaa-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(60,0,120,0.18) 0%, rgba(0,0,0,0.0) 80%);
+  overflow: hidden;
+}
+
+.fvaa-effect-card {
+  background: linear-gradient(135deg, rgba(30,30,60,0.95) 60%, rgba(80,0,120,0.85) 100%);
+  border: 3px solid #a0f6ff;
+  border-radius: 18px;
+  box-shadow: 0 0 32px 8px #6cf, 0 0 0 8px rgba(80,0,120,0.15);
+  padding: 2.5em 2em 2em 2em;
+  min-width: 340px;
+  max-width: 90vw;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: visible;
+  animation: fvaa-card-pop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes fvaa-card-pop {
+  0% { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+  80% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.fvaa-effect-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2em;
+  letter-spacing: 0.04em;
+  color: #a0f6ff;
+  text-shadow: 0 0 12px #6cf, 0 0 2px #fff;
+  margin-bottom: 0.2em;
+  animation: fvaa-title-glow 2.5s infinite alternate;
+}
+
+@keyframes fvaa-title-glow {
+  from { text-shadow: 0 0 12px #6cf, 0 0 2px #fff; }
+  to { text-shadow: 0 0 32px #a0f6ff, 0 0 8px #fff; }
+}
+
+.fvaa-effect-desc {
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
+  color: #e0e0ff;
+  text-shadow: 0 0 4px #6cf;
+}
+
+.fvaa-particles {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fvaa-particle {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #a0f6ff 0%, #6cf 60%, transparent 100%);
+  opacity: 0.7;
+  animation: fvaa-particle-float 3.5s linear infinite;
+}
+
+@keyframes fvaa-particle-float {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  60% { opacity: 1; }
+  100% { transform: translateY(-120px) scale(0.7); opacity: 0; }
+}
+
+.fvaa-effect-card .fvaa-close-btn {
+  position: absolute;
+  top: 0.7em; right: 1.1em;
+  background: none;
+  border: none;
+  color: #a0f6ff;
+  font-size: 1.5em;
+  cursor: pointer;
+  z-index: 2;
+  filter: drop-shadow(0 0 4px #6cf);
+  transition: color 0.2s;
+}
+.fvaa-effect-card .fvaa-close-btn:hover {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .fvaa-effect-card { min-width: 90vw; padding: 1.2em 0.5em; }
+  .fvaa-effect-title { font-size: 1.3em; }
+}
