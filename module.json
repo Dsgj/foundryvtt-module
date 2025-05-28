@@ -9,9 +9,9 @@
   "minimumCoreVersion": "13",
   "compatibleCoreVersion": "13.344",
   "esmodules": ["dist/main.js"],
-  "manifest": "module.json",
+  "manifest": "https://github.com/Dsgj/foundryvtt-module/releases/latest/download/module.json",
   "url": "https://github.com/yourusername/foundryvtt-module",
-  "download": "https://github.com/Dsgj/foundryvtt-module/releases/download/v1.0.0/foundryvtt-action-animations.zip",
+  "download": "https://github.com/Dsgj/foundryvtt-module/releases/latest/download/foundryvtt-action-animations.zip",
   "styles": ["styles/style.css"],
   "templates": ["templates/effect.html"],
   "dependencies": [
