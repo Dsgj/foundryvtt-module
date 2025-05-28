@@ -1,4 +1,5 @@
-export class MyModule {
+"use strict";
+class MyModule {
     constructor() {
         console.log('MyModule initialized');
     }
