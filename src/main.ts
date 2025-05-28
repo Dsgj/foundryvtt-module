@@ -24,7 +24,7 @@ interface ChatMessage {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyObject = any;
 
-export class MyModule {
+class MyModule {
     constructor() {
         console.log('MyModule initialized');
     }
