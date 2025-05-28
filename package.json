@@ -15,9 +15,7 @@
   ],
   "author": "Your Name",
   "license": "MIT",
-  "dependencies": {
-    "foundry-vtt-types": "^0.8.8"
-  },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "^5.0.0"
   },
