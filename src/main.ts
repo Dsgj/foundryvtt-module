@@ -74,19 +74,24 @@ async function playSequencerAnimation({
         return;
     }
     let file = "";
+    let filePath = "";
     // Choose animation based on type and result
     if (type === "attack") {
-        if (rollResult === 1) file = "jb2a.miss.blue.01";
-        else if (rollResult === 20) file = "jb2a.magic_missile.purple";
-        else file = "jb2a.sword_slash.blue";
+        if (rollResult === 1) {
+            filePath = "modules/jb2a_patreon/Library/1st_Level/Miss/Miss_01_Blue_30ft_Regular.webm";
+        } else if (rollResult === 20) {
+            filePath = "modules/jb2a_patreon/Library/1st_Level/Magic_Missile/MagicMissile_01_Purple_30ft_Regular.webm";
+        } else {
+            filePath = "modules/jb2a_patreon/Library/1st_Level/Sword_Slash/SwordSlash_01_Blue_Regular_15ft.webm";
+        }
     } else if (type === "cantrip") {
-        file = "jb2a.fire_bolt.orange";
+        filePath = "modules/jb2a_patreon/Library/Cantrips/Fire_Bolt/FireBolt_01_Orange_30ft_Regular.webm";
     }
-    if (!file) return;
+    if (!filePath) return;
     // Play the animation
     new (window as any).Sequence()
         .effect()
-        .file(`modules/jb2a_patreon/Library/3rd_Level/${file}.webm`)
+        .file(filePath)
         .atLocation(source)
         .stretchTo(target)
         .play();
